@@ -20,7 +20,7 @@ class UserRegistrationView(APIView):
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             print(user)
-            response_dict = {"message": "User Registration Success !"}
+            response_dict = {"Server": "User Registration Success !"}
             return Response(response_dict, status=201)
 
 

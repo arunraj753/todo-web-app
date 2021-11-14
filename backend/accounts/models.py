@@ -5,8 +5,8 @@ from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
 
-    def create_user(self, email, mobile, password, first_name, last_name=None):
-        user = self.model(email=email, mobile=mobile, first_name=first_name, last_name=last_name)
+    def create_user(self, email, mobile, password, first_name, last_name=None, profile_pic=None):
+        user = self.model(email=email, mobile=mobile, first_name=first_name, last_name=last_name, profile_pic=profile_pic)
         user.set_password(password)
         user.save(using=self.db)
         return user
@@ -20,7 +20,7 @@ class CustomUserManager(BaseUserManager):
         return user
         
 def user_directory_path(instance, filename):
-    return 'profile_pics/{0}_{1}_{2}'.format(instance.id, instance.first_name, filename)
+    return 'profile_pics/{0}_{1}'.format(instance.first_name, filename)
 
 class User(AbstractBaseUser, PermissionsMixin):
     email       = models.EmailField(unique=True)
